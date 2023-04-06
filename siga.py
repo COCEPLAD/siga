@@ -57,6 +57,8 @@ if st.button('Crear base SIGA'):
             for estacion in estaciones:
 
                 url = f"http://siga.inta.gob.ar/document/series/{estacion}.xls"
+                
+                st.write(url)
 
                         # Descarga de archivo Excel
                 def download_excel_file(url):
