@@ -7,6 +7,15 @@ st.set_page_config('SIGA')
 
 st.subheader('Generación de base completa del SIGA')
 
+url = "http://siga.inta.gob.ar/document/series/A872872.xls"
+
+response = requests.get(url)
+df = pd.read_excel(response.content)
+
+st.write(df.head())
+
+
+
 # df = pd.read_excel('Estaciones.xlsx')
 
 # # Seleccionar la columna y transformarla en una lista
