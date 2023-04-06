@@ -10,7 +10,9 @@ st.subheader('Generación de base completa del SIGA')
 df = pd.read_excel('Estaciones.xlsx')
 
 # Seleccionar la columna y transformarla en una lista
-estaciones = df['Id Interno'].tolist()
+# estaciones = df['Id Interno'].tolist()
+
+estaciones = ['A872872']
 
 st.write(estaciones)
 
@@ -77,6 +79,8 @@ if st.button('Crear base SIGA'):
 
         except:
             pass
+        
+        st.write(tabla)
 
         alert = st.container()
         
