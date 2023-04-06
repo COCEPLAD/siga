@@ -12,6 +12,8 @@ df = pd.read_excel('Estaciones.xlsx')
 # Seleccionar la columna y transformarla en una lista
 estaciones = df['Id Interno'].tolist()
 
+st.write(estaciones)
+
 if st.button('Crear base SIGA'):
 
     with st.spinner('Armando base completa SIGA :rain_cloud::mostly_sunny: Esta operación puede tardar unos minutos'):
