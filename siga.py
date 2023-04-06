@@ -75,6 +75,7 @@ if st.button('Crear base SIGA'):
                     return df
 
                 df1 = load_excel_to_df(file)
+                st.write(df1)
                 tabla = pd.concat([tabla, df1]) # concatenar df1 a tabla
 
         except:
