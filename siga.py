@@ -7,19 +7,10 @@ st.set_page_config('SIGA')
 
 st.subheader('Generación de base completa del SIGA')
 
-# url = "http://siga.inta.gob.ar/document/series/A872872.xls"
+df = pd.read_excel('Estaciones.xlsx')
 
-# response = requests.get(url)
-# df = pd.read_excel(response.content)
-
-# st.write(df.head())
-
-# # df = pd.read_excel('Estaciones.xlsx')
-
-# # # Seleccionar la columna y transformarla en una lista
-# # estaciones = df['Id Interno'].tolist()
-
-estaciones = ['A872872']
+# Seleccionar la columna y transformarla en una lista
+estaciones = df['Id Interno'].tolist()
 
 if st.button('Crear base SIGA'):
 
@@ -66,13 +57,6 @@ if st.button('Crear base SIGA'):
                 url = f"http://siga.inta.gob.ar/document/series/{estacion}.xls"
 
                         # Descarga de archivo Excel
-
-                # response = requests.get(url)
-                # df = pd.read_excel(response.content)  
-                # def download_excel_file(url):
-                #     with urllib.request.urlopen(url) as response:
-                #         data = response.read()
-                #     return data
                 
                 def download_excel_file(url):
                     with requests.get(url) as response:
@@ -88,7 +72,7 @@ if st.button('Crear base SIGA'):
                     return df
 
                 df1 = load_excel_to_df(file)
-                st.write(df1)
+                
                 tabla = pd.concat([tabla, df1]) # concatenar df1 a tabla
 
         except:
