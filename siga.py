@@ -7,19 +7,17 @@ st.set_page_config('SIGA')
 
 st.subheader('Generación de base completa del SIGA')
 
-url = "http://siga.inta.gob.ar/document/series/A872872.xls"
+# url = "http://siga.inta.gob.ar/document/series/A872872.xls"
 
-response = requests.get(url)
-df = pd.read_excel(response.content)
+# response = requests.get(url)
+# df = pd.read_excel(response.content)
 
-st.write(df.head())
+# st.write(df.head())
 
+# # df = pd.read_excel('Estaciones.xlsx')
 
-
-# df = pd.read_excel('Estaciones.xlsx')
-
-# # Seleccionar la columna y transformarla en una lista
-# estaciones = df['Id Interno'].tolist()
+# # # Seleccionar la columna y transformarla en una lista
+# # estaciones = df['Id Interno'].tolist()
 
 estaciones = ['A872872']
 
@@ -66,24 +64,31 @@ if st.button('Crear base SIGA'):
             for estacion in estaciones:
 
                 url = f"http://siga.inta.gob.ar/document/series/{estacion}.xls"
-                
-                st.write(url)
 
                         # Descarga de archivo Excel
+
+                # response = requests.get(url)
+                # df = pd.read_excel(response.content)  
+                # def download_excel_file(url):
+                #     with urllib.request.urlopen(url) as response:
+                #         data = response.read()
+                #     return data
+                
                 def download_excel_file(url):
-                    with urllib.request.urlopen(url) as response:
-                        data = response.read()
-                    return data
+                    with requests.get(url) as response:
+                     pass
+                    return response
 
                 file = download_excel_file(url)
 
                 # Carga de archivo Excel en tabla de Pandas
                 def load_excel_to_df(file):
-                    df = pd.read_excel(file, engine='xlrd')
+                    df = pd.read_excel(file.content)
                     df.insert(0, 'id_estacion', estacion)
                     return df
 
                 df1 = load_excel_to_df(file)
+                st.write(df1)
                 tabla = pd.concat([tabla, df1]) # concatenar df1 a tabla
 
         except:
@@ -100,4 +105,3 @@ if st.button('Crear base SIGA'):
     
     st.snow()
     alert.success('Descargá la base!:point_down:')
-    
